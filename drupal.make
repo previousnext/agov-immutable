@@ -1,8 +1,8 @@
-; Drush Make API version.
 api = 2
+core = 7.x
 
 ; Drupal core.
-core = 7.x
+projects[drupal][version] = 7.32
 
 ; Contrib modules.
 projects[amazons3][subdir] = "contrib"
