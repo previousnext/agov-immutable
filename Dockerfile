@@ -1,1 +1,1 @@
-FROM nickschuch:drupal-build
+FROM nickschuch/drupal-build
