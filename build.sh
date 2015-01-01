@@ -10,6 +10,8 @@ MAKEFILE=drupal.make 	# Name of the drush make file that we will build the appli
 
 # Build the code base.
 drush make $WEBROOT/$MAKEFILE $DOCROOT
+ln -s $WEBROOT/modules $DOCROOT/sites/all/modules
+ln -s $WEBROOT/themes $DOCROOT/sites/all/themes
 
 # Setup configuration files.
 scp $BUILD/conf/drupal/settings.php $DOCROOT/sites/default/settings.php

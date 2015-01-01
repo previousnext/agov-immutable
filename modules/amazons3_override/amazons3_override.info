@@ -1,0 +1,4 @@
+name = AmazonS3 Override
+description = Overrides the public stream wrapper to use the one provided by AmazonS3 module.
+core = 7.x
+dependencies[] = amazons3

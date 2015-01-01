@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Core hooks for amazons3_override.
+ */
+
+/**
+ * Implements hook_stream_wrappers_alter().
+ */
+function amazons3_override_stream_wrappers_alter(&$wrappers) {
+  $wrappers['public']['name'] = t('Public files (Overridden by Amazon S3)');
+  $wrappers['public']['class'] = 'AmazonS3StreamWrapper';
+}
