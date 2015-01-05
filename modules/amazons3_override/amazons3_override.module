@@ -5,10 +5,31 @@
  * Core hooks for amazons3_override.
  */
 
+define('S3_SCHEME', 's3');
+
 /**
- * Implements hook_stream_wrappers_alter().
+ * Implements hook_field_default_field_bases_alter().
  */
-function amazons3_override_stream_wrappers_alter(&$wrappers) {
-  $wrappers['public']['name'] = t('Public files (Overridden by Amazon S3)');
-  $wrappers['public']['class'] = 'AmazonS3StreamWrapper';
+function amazons3_override_field_default_field_bases_alter(&$info) {
+  foreach ($info as $delta => $field) {
+    if (!empty($field['settings']['uri_scheme'])) {
+      $info[$delta]['settings']['uri_scheme'] = S3_SCHEME;
+    }
+  }
+}
+
+/**
+ * Implements hook_field_default_field_bases_alter().
+ */
+function amazons3_override_field_default_field_instances_alter(&$info) {
+  foreach ($info as $delta => $field) {
+    $types = array(
+        'file_generic',
+        'media_generic',
+    );
+    if ($field['widget'] &&
+        in_array($field['widget']['type'], $types)) {
+      $info[$delta]['widget']['settings']['allowed_schemes'][S3_SCHEME] = S3_SCHEME;
+    }
+  }
 }
