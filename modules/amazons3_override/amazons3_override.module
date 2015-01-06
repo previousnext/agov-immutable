@@ -8,6 +8,26 @@
 define('S3_SCHEME', 's3');
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function amazons3_override_form_agov_contact_printable_alter(&$form, &$form_state) {
+  if (!empty($form['agov_contact_printable_upload']['#upload_location'])) {
+    $form['agov_contact_printable_upload']['#upload_location'] = S3_SCHEME . '://';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function amazons3_override_form_file_entity_add_upload_alter(&$form, &$form_state) {
+  if (!empty($form['scheme']['#options'])) {
+    $form['scheme']['#options'] = array(
+      S3_SCHEME => t('Amazon Simple Storage Service'),
+    );
+  }
+}
+
+/**
  * Implements hook_field_default_field_bases_alter().
  */
 function amazons3_override_field_default_field_bases_alter(&$info) {
@@ -19,13 +39,13 @@ function amazons3_override_field_default_field_bases_alter(&$info) {
 }
 
 /**
- * Implements hook_field_default_field_bases_alter().
+ * Implements hook_field_default_field_instances_alter().
  */
 function amazons3_override_field_default_field_instances_alter(&$info) {
   foreach ($info as $delta => $field) {
     $types = array(
-        'file_generic',
-        'media_generic',
+      'file_generic',
+      'media_generic',
     );
     if ($field['widget'] &&
         in_array($field['widget']['type'], $types)) {
