@@ -21,7 +21,7 @@ namespace :docker do
   end
 
   task :deploy do
-    run "docker run -d -p 0.0.0.0:80:80 --env-file=/root/environment #{container}:#{tag}"
+    run "docker run -d -p 0.0.0.0:80:80 --name=#{project} --env-file=/root/environment #{container}:#{tag}"
     # run "docker exec #{project} 'cd /var/www/app && ../hooks/deploy.sh'"
   end
 

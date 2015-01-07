@@ -31,6 +31,20 @@ function amazons3_override_form_file_entity_add_upload_alter(&$form, &$form_stat
  * Implements hook_field_default_field_bases_alter().
  */
 function amazons3_override_field_default_field_bases_alter(&$info) {
+  _amazons3_override_field_bases_alter($info)
+}
+
+/**
+ * Implements hook_field_bases_alter().
+ */
+function amazons3_override_field_bases_alter(&$info) {
+  _amazons3_override_field_bases_alter($info)
+}
+
+/**
+ * Helper function for amazons3_override_field_default_field_bases_alter() and hook_field_bases_alter().
+ */
+function _amazons3_override_field_bases_alter(&$info) {
   foreach ($info as $delta => $field) {
     if (!empty($field['settings']['uri_scheme'])) {
       $info[$delta]['settings']['uri_scheme'] = S3_SCHEME;
@@ -42,6 +56,20 @@ function amazons3_override_field_default_field_bases_alter(&$info) {
  * Implements hook_field_default_field_instances_alter().
  */
 function amazons3_override_field_default_field_instances_alter(&$info) {
+  _amazons3_override_field_instances_alter($info);
+}
+
+/**
+ * Implements hook_field_instances_alter().
+ */
+function amazons3_override_field_instances_alter(&$info) {
+  _amazons3_override_field_instances_alter($info);
+}
+
+/**
+ * Helper function for amazons3_override_field_default_field_instances_alter() and amazons3_override_field_instances_alter().
+ */
+function _amazons3_override_field_instances_alter(&$info) {
   foreach ($info as $delta => $field) {
     $types = array(
       'file_generic',
