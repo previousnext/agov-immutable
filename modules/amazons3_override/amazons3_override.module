@@ -31,14 +31,14 @@ function amazons3_override_form_file_entity_add_upload_alter(&$form, &$form_stat
  * Implements hook_field_default_field_bases_alter().
  */
 function amazons3_override_field_default_field_bases_alter(&$info) {
-  _amazons3_override_field_bases_alter($info)
+  _amazons3_override_field_bases_alter($info);
 }
 
 /**
  * Implements hook_field_bases_alter().
  */
 function amazons3_override_field_bases_alter(&$info) {
-  _amazons3_override_field_bases_alter($info)
+  _amazons3_override_field_bases_alter($info);
 }
 
 /**
